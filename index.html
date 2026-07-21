@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estetik Lavanda Tort</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f3ece4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Caveat', cursive;
+        }
+
+        /* Tort qutisi va uning ichidagi qog'oz effekti */
+        .box-container {
+            background: #eae1d8;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.08), 0 20px 50px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* Tortning umumiy yuzasi */
+        .cake {
+            width: 420px;
+            height: 420px;
+            background: #9d8db9; /* Pastel binafsha */
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 
+                inset -10px -10px 30px rgba(0, 0, 0, 0.15),
+                inset 10px 10px 30px rgba(255, 255, 255, 0.2),
+                0 15px 35px rgba(50, 40, 70, 0.3);
+            background-image: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 10px);
+        }
+
+        /* Yozuvlar bo'limi */
+        .text-layer {
+            position: absolute;
+            right: 45px;
+            top: 110px;
+            text-align: center;
+            transform: rotate(5deg);
+            color: #fcfbfa;
+            text-shadow: 
+                1px 1px 0px #d4cbdc,
+                2px 2px 2px rgba(0,0,0,0.15),
+                -1px -1px 0px rgba(255,255,255,0.6);
+            user-select: none;
+        }
+
+        .text-layer h1 {
+            font-size: 46px;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .text-layer h2 {
+            font-size: 52px;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .heart-cream {
+            font-size: 28px;
+            margin-top: 5px;
+            opacity: 0.95;
+            display: inline-block;
+            transform: scaleX(1.2);
+        }
+
+        /* Lolalar dastasi (Buketi) */
+        .bouquet {
+            position: absolute;
+            left: 55px;
+            top: 70px;
+            width: 200px;
+            height: 300px;
+        }
+
+        /* Poyalar va barglar */
+        .stems {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stem {
+            position: absolute;
+            background: #738865;
+            width: 4px;
+            border-radius: 2px;
+            transform-origin: bottom center;
+            box-shadow: inset -1px 0 2px rgba(0,0,0,0.2);
+        }
+        .stem-1 { height: 140px; left: 85px; top: 90px; transform: rotate(-15deg); }
+        .stem-2 { height: 160px; left: 95px; top: 75px; transform: rotate(-5deg); }
+        .stem-3 { height: 150px; left: 110px; top: 85px; transform: rotate(10deg); }
+        .stem-4 { height: 130px; left: 75px; top: 110px; transform: rotate(-25deg); }
+        .stem-5 { height: 130px; left: 115px; top: 115px; transform: rotate(20deg); }
+
+        .leaf {
+            position: absolute;
+            background: #7a906c;
+            border-radius: 50% 50% 0 50%;
+            transform-origin: bottom right;
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2);
+        }
+        .leaf-1 { width: 14px; height: 45px; left: 55px; top: 160px; transform: rotate(-40deg); }
+        .leaf-2 { width: 14px; height: 50px; left: 115px; top: 150px; border-radius: 50% 50% 50% 0; transform: rotate(35deg); }
+
+        /* Bant (Bow) */
+        .ribbon-bow {
+            position: absolute;
+            left: 82px;
+            top: 220px;
+            z-index: 10;
+        }
+        .loop {
+            position: absolute;
+            border: 4.5px solid #faf6ee;
+            width: 28px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: 1px 2px 3px rgba(0,0,0,0.15);
+        }
+        .loop.left { transform: rotate(-25deg); left: -22px; }
+        .loop.right { transform: rotate(25deg); left: 6px; }
+        .center-knot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #faf6ee;
+            border-radius: 50%;
+            left: 2px;
+            top: 6px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .tail {
+            position: absolute;
+            background: #faf6ee;
+            width: 4px;
+            height: 35px;
+            border-radius: 2px;
+            top: 12px;
+        }
+        .tail.left { transform: rotate(-30deg); left: -8px; }
+        .tail.right { transform: rotate(30deg); left: 14px; }
+
+        /* Lolalar (Tulips) */
+        .tulip {
+            position: absolute;
+            width: 42px;
+            height: 56px;
+            z-index: 5;
+        }
+
+        /* Lonalarning 3D guldastalari kombinatsiyasi */
+        .petal {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 
+                inset -3px -3px 8px rgba(0,0,0,0.15),
+                inset 3px 3px 8px rgba(255,255,255,0.3),
+                1px 3px 5px rgba(0,0,0,0.1);
+        }
+
+        .petal.left-p {
+            width: 75%;
+            transform: rotate(-15deg);
+            left: 0;
+        }
+        .petal.right-p {
+            width: 75%;
+            transform: rotate(15deg);
+            right: 0;
+        }
+        .petal.center-p {
+            width: 70%;
+            left: 15%;
+            transform: scale(0.95);
+            box-shadow: 
+                inset 0 -4px 8px rgba(0,0,0,0.1),
+                0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        /* Ranglar palitrasi (Pushti va Binafsha lolalar) */
+        .purple-tulip .petal { background: #7c689c; }
+        .purple-tulip .petal.center-p { background: #8975aa; }
+
+        .pink-tulip .petal { background: #dca7a7; }
+        .pink-tulip .petal.center-p { background: #e5b4b4; }
+
+        .light-purple .petal { background: #927fae; }
+        .light-purple .petal.center-p { background: #9f8cbe; }
+
+        /* Har bir lolaning joylashuvi */
+        .t1 { left: 45px; top: 40px; transform: rotate(-10deg); } /* Yuqori markaziy binafsha */
+        .t2 { left: -5px; top: 70px; transform: rotate(-25deg); } /* Chap pushti */
+        .t3 { left: 63px; top: 80px; transform: rotate(5deg); }   /* Markaziy to'q binafsha */
+        .t4 { left: 26px; top: 110px; transform: rotate(-15deg); }/* Pastki chap binafsha */
+        .t5 { left: 95px; top: 72px; transform: rotate(20deg); }  /* O'ng pushti */
+        .t6 { left: 112px; top: 115px; transform: rotate(35deg); }/* O'ng pastki binafsha */
+
+        /* Shakar durchalar (Cream Pearls) */
+        .pearl {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 
+                inset -1px -1px 3px rgba(0,0,0,0.2),
+                1px 2px 3px rgba(0,0,0,0.1);
+        }
+        .p1 { width: 5px; height: 5px; left: 100px; top: 50px; background: #eae5f0; }
+        .p2 { width: 7px; height: 7px; left: 210px; top: 75px; background: #fff; }
+        .p3 { width: 4px; height: 4px; left: 240px; top: 60px; background: #eae5f0; }
+        .p4 { width: 6px; height: 6px; left: 260px; top: 260px; background: #fff; }
+        .p5 { width: 5px; height: 5px; left: 340px; top: 230px; background: #eae5f0; }
+        .p6 { width: 7px; height: 7px; left: 150px; top: 320px; background: #fff; }
+        .p7 { width: 4px; height: 4px; left: 225px; top: 310px; background: #eae5f0; }
+        .p8 { width: 5px; height: 5px; left: 50px; top: 160px; background: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="box-container">
+        <div class="cake">
+            
+            <!-- Guldasta qismi -->
+            <div class="bouquet">
+                <!-- Poyalar va Barglar -->
+                <div class="stems">
+                    <div class="stem stem-1"></div>
+                    <div class="stem stem-2"></div>
+                    <div class="stem stem-3"></div>
+                    <div class="stem stem-4"></div>
+                    <div class="stem stem-5"></div>
+                    
+                    <div class="leaf leaf-1"></div>
+                    <div class="leaf leaf-2"></div>
+                </div>
+
+                <!-- Lolalar -->
+                <div class="tulip purple-tulip t1">
+                    <div class="petal left-p"></div>
+                    <div class="petal right-p"></div>
+                    <div class="petal center-p"></div>
+                </div>
+                <div class="tulip pink-tulip t2">
+                    <div class="petal left-p"></div>
+                    <div class="petal right-p"></div>
+                    <div class="petal center-p"></div>
+                </div>
+                <div class="tulip light-purple t3">
+                    <div class="petal left-p"></div>
+                    <div class="petal right-p"></div>
+                    <div class="petal center-p"></div>
+                </div>
+                <div class="tulip purple-tulip t4">
+                    <div class="petal left-p"></div>
+                    <div class="petal right-p"></div>
+                    <div class="petal center-p"></div>
+                </div>
+                <div class="tulip pink-tulip t5">
+                    <div class="petal left-p"></div>
+                    <div class="petal right-p"></div>
+                    <div class="petal center-p"></div>
+                </div>
+                <div class="tulip light-purple t6">
+                    <div class="petal left-p"></div>
+                    <div class="petal right-p"></div>
+                    <div class="petal center-p"></div>
+                </div>
+
+                <!-- Boyoqlik Bant -->
+                <div class="ribbon-bow">
+                    <div class="loop left"></div>
+                    <div class="loop right"></div>
+                    <div class="center-knot"></div>
+                    <div class="tail left"></div>
+                    <div class="tail right"></div>
+                </div>
+            </div>
+
+            <!-- Kremdan yozuvlar -->
+            <div class="text-layer">
+                <h1>happy</h1>
+                <h2>birthday</h2>
+                <h2>Marjona</h2>
+                <div class="heart-cream">♥</div>
+            </div>
+
+            <!-- Mayda bezak marvaridlari -->
+            <div class="pearl p1"></div>
+            <div class="pearl p2"></div>
+            <div class="pearl p3"></div>
+            <div class="pearl p4"></div>
+            <div class="pearl p5"></div>
+            <div class="pearl p6"></div>
+            <div class="pearl p7"></div>
+            <div class="pearl p8"></div>
+
+        </div>
+    </div>
+
+</body>
+</html>
