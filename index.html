@@ -32,13 +32,38 @@
     background:
       radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.6), transparent 55%),
       linear-gradient(160deg, var(--bg-1), var(--bg-2) 65%);
-    min-height:100vh;
+    min-height:100svh;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
     font-family:'Quicksand', sans-serif;
     position:relative;
+    padding:16px;
+  }
+
+  /* scales the whole scene down to fit any screen width without breaking
+     the absolute-positioned layout inside */
+  .stage{
+    width:460px;
+    transform: scale(var(--scale, 1));
+    transform-origin: center center;
+  }
+
+  @media (max-width: 520px){
+    .stage{ --scale: 0.78; }
+  }
+  @media (max-width: 400px){
+    .stage{ --scale: 0.68; }
+  }
+  @media (max-width: 340px){
+    .stage{ --scale: 0.58; }
+  }
+  @media (max-height: 700px){
+    .stage{ --scale: 0.72; }
+  }
+  @media (max-height: 560px){
+    .stage{ --scale: 0.58; }
   }
 
   /* ambient floating petals */
@@ -311,6 +336,7 @@
 </head>
 <body>
 
+  <div class="stage">
   <div class="scene">
     <div class="stage-shadow"></div>
 
@@ -374,7 +400,8 @@
     </div>
 
     <div class="plate"></div>
-    <div class="caption"> Tug'ilgan kuniz muborak bo'lsin! 🎂</div>
+    <div class="caption">Marjonaning tug'ilgan kuni muborak bo'lsin! 🎂</div>
+  </div>
   </div>
 
   <script>
