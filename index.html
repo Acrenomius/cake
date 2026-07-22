@@ -1,324 +1,410 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estetik Lavanda Tort</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marjonaga tug'ilgan kun torti</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600&display=swap');
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  :root{
+    --bg-1:#efe6f4;
+    --bg-2:#f7ede7;
+    --plate:#fffaf5;
+    --cake-1:#b9a1d4;
+    --cake-2:#8f74b3;
+    --cake-shadow:#5c4a80;
+    --cream:#fffdf9;
+    --gold:#d8b56a;
+    --stem:#7c9468;
+    --tulip-purple:#7c68a0;
+    --tulip-purple-l:#9782bd;
+    --tulip-pink:#e3aab0;
+    --tulip-pink-l:#eec2c6;
+    --tulip-lav:#9a86bf;
+  }
 
-        body {
-            background-color: #f3ece4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            font-family: 'Caveat', cursive;
-        }
+  *{ box-sizing:border-box; margin:0; padding:0; }
 
-        /* Tort qutisi va uning ichidagi qog'oz effekti */
-        .box-container {
-            background: #eae1d8;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.08), 0 20px 50px rgba(0,0,0,0.1);
-            position: relative;
-        }
+  html,body{ height:100%; }
 
-        /* Tortning umumiy yuzasi */
-        .cake {
-            width: 420px;
-            height: 420px;
-            background: #9d8db9; /* Pastel binafsha */
-            border-radius: 50%;
-            position: relative;
-            box-shadow: 
-                inset -10px -10px 30px rgba(0, 0, 0, 0.15),
-                inset 10px 10px 30px rgba(255, 255, 255, 0.2),
-                0 15px 35px rgba(50, 40, 70, 0.3);
-            background-image: 
-                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent),
-                repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 10px);
-        }
+  body{
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.6), transparent 55%),
+      linear-gradient(160deg, var(--bg-1), var(--bg-2) 65%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-family:'Quicksand', sans-serif;
+    position:relative;
+  }
 
-        /* Yozuvlar bo'limi */
-        .text-layer {
-            position: absolute;
-            right: 45px;
-            top: 110px;
-            text-align: center;
-            transform: rotate(5deg);
-            color: #fcfbfa;
-            text-shadow: 
-                1px 1px 0px #d4cbdc,
-                2px 2px 2px rgba(0,0,0,0.15),
-                -1px -1px 0px rgba(255,255,255,0.6);
-            user-select: none;
-        }
+  /* ambient floating petals */
+  .petal-fx{
+    position:absolute;
+    top:-40px;
+    border-radius:50% 0 50% 50%;
+    opacity:0.55;
+    animation: fall linear infinite;
+    pointer-events:none;
+  }
+  @keyframes fall{
+    0%   { transform: translateY(-10vh) rotate(0deg); opacity:0; }
+    10%  { opacity:0.6; }
+    100% { transform: translateY(115vh) rotate(400deg); opacity:0; }
+  }
 
-        .text-layer h1 {
-            font-size: 46px;
-            line-height: 1.1;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
+  .scene{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    animation: rise 1.1s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(24px) scale(.97); }
+    to{ opacity:1; transform: translateY(0) scale(1); }
+  }
 
-        .text-layer h2 {
-            font-size: 52px;
-            line-height: 1;
-            font-weight: 700;
-        }
+  .stage-shadow{
+    position:absolute;
+    bottom:-18px;
+    width:380px;
+    height:36px;
+    left:50%;
+    transform:translateX(-50%);
+    background: radial-gradient(ellipse, rgba(80,60,100,0.28), transparent 70%);
+    filter: blur(2px);
+    z-index:0;
+  }
 
-        .heart-cream {
-            font-size: 28px;
-            margin-top: 5px;
-            opacity: 0.95;
-            display: inline-block;
-            transform: scaleX(1.2);
-        }
+  .plate{
+    width:460px;
+    height:44px;
+    background: linear-gradient(180deg, var(--plate), #f1e6da);
+    border-radius:50%;
+    box-shadow:
+      0 2px 0 rgba(255,255,255,0.6) inset,
+      0 18px 30px rgba(70,50,70,0.18);
+    position:relative;
+    z-index:1;
+    margin-top:-30px;
+  }
 
-        /* Lolalar dastasi (Buketi) */
-        .bouquet {
-            position: absolute;
-            left: 55px;
-            top: 70px;
-            width: 200px;
-            height: 300px;
-        }
+  .cake-wrap{
+    position:relative;
+    width:400px;
+    height:400px;
+    z-index:2;
+  }
 
-        /* Poyalar va barglar */
-        .stems {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+  /* cake body: rounded fondant top with subtle side depth */
+  .cake{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    position:relative;
+    background:
+      radial-gradient(circle at 32% 26%, rgba(255,255,255,0.35), transparent 42%),
+      radial-gradient(circle at 72% 78%, rgba(0,0,0,0.10), transparent 55%),
+      linear-gradient(155deg, var(--cake-1) 0%, var(--cake-2) 62%, var(--cake-shadow) 100%);
+    box-shadow:
+      inset 0 -14px 26px rgba(50,35,70,0.35),
+      inset 0 14px 22px rgba(255,255,255,0.25),
+      0 24px 50px rgba(60,40,80,0.35);
+  }
 
-        .stem {
-            position: absolute;
-            background: #738865;
-            width: 4px;
-            border-radius: 2px;
-            transform-origin: bottom center;
-            box-shadow: inset -1px 0 2px rgba(0,0,0,0.2);
-        }
-        .stem-1 { height: 140px; left: 85px; top: 90px; transform: rotate(-15deg); }
-        .stem-2 { height: 160px; left: 95px; top: 75px; transform: rotate(-5deg); }
-        .stem-3 { height: 150px; left: 110px; top: 85px; transform: rotate(10deg); }
-        .stem-4 { height: 130px; left: 75px; top: 110px; transform: rotate(-25deg); }
-        .stem-5 { height: 130px; left: 115px; top: 115px; transform: rotate(20deg); }
+  /* piped border dots around the rim */
+  .rim{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .rim span{
+    position:absolute;
+    width:12px;
+    height:12px;
+    background: radial-gradient(circle at 35% 30%, #fff, var(--cream) 60%, #ecdff5 100%);
+    border-radius:50% 50% 50% 0;
+    box-shadow: 1px 2px 3px rgba(60,40,70,0.25);
+  }
 
-        .leaf {
-            position: absolute;
-            background: #7a906c;
-            border-radius: 50% 50% 0 50%;
-            transform-origin: bottom right;
-            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2);
-        }
-        .leaf-1 { width: 14px; height: 45px; left: 55px; top: 160px; transform: rotate(-40deg); }
-        .leaf-2 { width: 14px; height: 50px; left: 115px; top: 150px; border-radius: 50% 50% 50% 0; transform: rotate(35deg); }
+  .bouquet{
+    position:absolute;
+    left:38px;
+    top:56px;
+    width:210px;
+    height:300px;
+    z-index:4;
+  }
 
-        /* Bant (Bow) */
-        .ribbon-bow {
-            position: absolute;
-            left: 82px;
-            top: 220px;
-            z-index: 10;
-        }
-        .loop {
-            position: absolute;
-            border: 4.5px solid #faf6ee;
-            width: 28px;
-            height: 20px;
-            border-radius: 50%;
-            box-shadow: 1px 2px 3px rgba(0,0,0,0.15);
-        }
-        .loop.left { transform: rotate(-25deg); left: -22px; }
-        .loop.right { transform: rotate(25deg); left: 6px; }
-        .center-knot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #faf6ee;
-            border-radius: 50%;
-            left: 2px;
-            top: 6px;
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-        .tail {
-            position: absolute;
-            background: #faf6ee;
-            width: 4px;
-            height: 35px;
-            border-radius: 2px;
-            top: 12px;
-        }
-        .tail.left { transform: rotate(-30deg); left: -8px; }
-        .tail.right { transform: rotate(30deg); left: 14px; }
+  .stem{
+    position:absolute;
+    background: linear-gradient(90deg, #5f7a4d, var(--stem));
+    width:4px;
+    border-radius:3px;
+    transform-origin:bottom center;
+    box-shadow: inset -1px 0 2px rgba(0,0,0,0.25);
+  }
+  .stem-1{ height:150px; left:88px; top:95px; transform:rotate(-15deg);}
+  .stem-2{ height:170px; left:98px; top:78px; transform:rotate(-5deg);}
+  .stem-3{ height:158px; left:114px; top:88px; transform:rotate(10deg);}
+  .stem-4{ height:138px; left:78px; top:114px; transform:rotate(-25deg);}
+  .stem-5{ height:138px; left:120px; top:118px; transform:rotate(20deg);}
 
-        /* Lolalar (Tulips) */
-        .tulip {
-            position: absolute;
-            width: 42px;
-            height: 56px;
-            z-index: 5;
-        }
+  .leaf{
+    position:absolute;
+    background: linear-gradient(135deg, #8ba379, var(--stem));
+    border-radius:50% 50% 0 50%;
+    transform-origin:bottom right;
+    box-shadow: inset 1px 1px 3px rgba(255,255,255,0.25);
+  }
+  .leaf-1{ width:15px; height:48px; left:56px; top:168px; transform:rotate(-40deg);}
+  .leaf-2{ width:15px; height:52px; left:120px; top:158px; border-radius:50% 50% 50% 0; transform:rotate(35deg);}
 
-        /* Lonalarning 3D guldastalari kombinatsiyasi */
-        .petal {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            box-shadow: 
-                inset -3px -3px 8px rgba(0,0,0,0.15),
-                inset 3px 3px 8px rgba(255,255,255,0.3),
-                1px 3px 5px rgba(0,0,0,0.1);
-        }
+  .ribbon-bow{ position:absolute; left:86px; top:228px; z-index:10; }
+  .loop{
+    position:absolute;
+    border:4.5px solid var(--cream);
+    width:28px; height:20px;
+    border-radius:50%;
+    box-shadow: 1px 2px 4px rgba(60,40,60,0.2);
+  }
+  .loop.left{ transform:rotate(-25deg); left:-22px; }
+  .loop.right{ transform:rotate(25deg); left:6px; }
+  .center-knot{
+    position:absolute; width:9px; height:9px;
+    background: radial-gradient(circle at 35% 30%, #fff, var(--gold) 120%);
+    border-radius:50%; left:2px; top:6px;
+    box-shadow:1px 1px 2px rgba(0,0,0,0.25);
+  }
+  .tail{ position:absolute; background:var(--cream); width:4px; height:35px; border-radius:2px; top:12px; }
+  .tail.left{ transform:rotate(-30deg); left:-8px; }
+  .tail.right{ transform:rotate(30deg); left:14px; }
 
-        .petal.left-p {
-            width: 75%;
-            transform: rotate(-15deg);
-            left: 0;
-        }
-        .petal.right-p {
-            width: 75%;
-            transform: rotate(15deg);
-            right: 0;
-        }
-        .petal.center-p {
-            width: 70%;
-            left: 15%;
-            transform: scale(0.95);
-            box-shadow: 
-                inset 0 -4px 8px rgba(0,0,0,0.1),
-                0 3px 6px rgba(0,0,0,0.15);
-        }
+  .tulip{
+    position:absolute;
+    width:44px;
+    height:58px;
+    z-index:5;
+    animation: sway 4.5s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  .tulip:nth-child(odd){ animation-duration:5.2s; }
+  @keyframes sway{
+    0%,100%{ transform: rotate(var(--r,0deg)); }
+    50%{ transform: rotate(calc(var(--r,0deg) + 3deg)); }
+  }
 
-        /* Ranglar palitrasi (Pushti va Binafsha lolalar) */
-        .purple-tulip .petal { background: #7c689c; }
-        .purple-tulip .petal.center-p { background: #8975aa; }
+  .petal{
+    position:absolute;
+    width:100%; height:100%;
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  }
+  .petal.left-p{ width:76%; transform:rotate(-16deg); left:0; }
+  .petal.right-p{ width:76%; transform:rotate(16deg); right:0; }
+  .petal.center-p{ width:70%; left:15%; transform:scale(0.97); }
 
-        .pink-tulip .petal { background: #dca7a7; }
-        .pink-tulip .petal.center-p { background: #e5b4b4; }
+  .purple-tulip .petal{ background: linear-gradient(145deg, var(--tulip-purple-l), var(--tulip-purple)); box-shadow: inset -3px -3px 7px rgba(0,0,0,0.18), inset 3px 3px 7px rgba(255,255,255,0.3), 1px 3px 5px rgba(0,0,0,0.12);}
+  .purple-tulip .petal.center-p{ background: linear-gradient(160deg, #a893c8, #8975aa); }
 
-        .light-purple .petal { background: #927fae; }
-        .light-purple .petal.center-p { background: #9f8cbe; }
+  .pink-tulip .petal{ background: linear-gradient(145deg, var(--tulip-pink-l), var(--tulip-pink)); box-shadow: inset -3px -3px 7px rgba(0,0,0,0.12), inset 3px 3px 7px rgba(255,255,255,0.35), 1px 3px 5px rgba(0,0,0,0.1);}
+  .pink-tulip .petal.center-p{ background: linear-gradient(160deg, #f2cbcd, #e5b4b4); }
 
-        /* Har bir lolaning joylashuvi */
-        .t1 { left: 45px; top: 40px; transform: rotate(-10deg); } /* Yuqori markaziy binafsha */
-        .t2 { left: -5px; top: 70px; transform: rotate(-25deg); } /* Chap pushti */
-        .t3 { left: 63px; top: 80px; transform: rotate(5deg); }   /* Markaziy to'q binafsha */
-        .t4 { left: 26px; top: 110px; transform: rotate(-15deg); }/* Pastki chap binafsha */
-        .t5 { left: 95px; top: 72px; transform: rotate(20deg); }  /* O'ng pushti */
-        .t6 { left: 112px; top: 115px; transform: rotate(35deg); }/* O'ng pastki binafsha */
+  .light-purple .petal{ background: linear-gradient(145deg, #ac9acb, var(--tulip-lav)); box-shadow: inset -3px -3px 7px rgba(0,0,0,0.15), inset 3px 3px 7px rgba(255,255,255,0.3), 1px 3px 5px rgba(0,0,0,0.1);}
+  .light-purple .petal.center-p{ background: linear-gradient(160deg, #b7a5d6, #9f8cbe); }
 
-        /* Shakar durchalar (Cream Pearls) */
-        .pearl {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 
-                inset -1px -1px 3px rgba(0,0,0,0.2),
-                1px 2px 3px rgba(0,0,0,0.1);
-        }
-        .p1 { width: 5px; height: 5px; left: 100px; top: 50px; background: #eae5f0; }
-        .p2 { width: 7px; height: 7px; left: 210px; top: 75px; background: #fff; }
-        .p3 { width: 4px; height: 4px; left: 240px; top: 60px; background: #eae5f0; }
-        .p4 { width: 6px; height: 6px; left: 260px; top: 260px; background: #fff; }
-        .p5 { width: 5px; height: 5px; left: 340px; top: 230px; background: #eae5f0; }
-        .p6 { width: 7px; height: 7px; left: 150px; top: 320px; background: #fff; }
-        .p7 { width: 4px; height: 4px; left: 225px; top: 310px; background: #eae5f0; }
-        .p8 { width: 5px; height: 5px; left: 50px; top: 160px; background: #fff; }
-    </style>
+  .t1{ left:47px; top:38px; --r:-10deg; }
+  .t2{ left:-4px; top:70px; --r:-25deg; }
+  .t3{ left:65px; top:80px; --r:5deg; }
+  .t4{ left:28px; top:112px; --r:-15deg; }
+  .t5{ left:98px; top:72px; --r:20deg; }
+  .t6{ left:115px; top:117px; --r:35deg; }
+
+  .pearl{
+    position:absolute;
+    background: radial-gradient(circle at 35% 30%, #fff, #f1e8fa 70%);
+    border-radius:50%;
+    box-shadow: inset -1px -1px 3px rgba(0,0,0,0.2), 1px 2px 3px rgba(0,0,0,0.12);
+    animation: twinkle 2.6s ease-in-out infinite;
+  }
+  @keyframes twinkle{ 0%,100%{opacity:.65;} 50%{opacity:1;} }
+  .p1{ width:5px;height:5px;left:110px;top:44px; }
+  .p2{ width:7px;height:7px;left:220px;top:70px; animation-delay:.3s;}
+  .p3{ width:4px;height:4px;left:250px;top:56px; animation-delay:.9s;}
+  .p4{ width:6px;height:6px;left:268px;top:255px; animation-delay:.5s;}
+  .p5{ width:5px;height:5px;left:345px;top:225px; animation-delay:1.1s;}
+  .p6{ width:7px;height:7px;left:155px;top:322px; animation-delay:.2s;}
+  .p7{ width:4px;height:4px;left:230px;top:312px; animation-delay:1.4s;}
+  .p8{ width:5px;height:5px;left:52px;top:150px; animation-delay:.7s;}
+
+  .text-layer{
+    position:absolute;
+    right:36px;
+    top:104px;
+    text-align:center;
+    transform:rotate(4deg);
+    color:var(--cream);
+    text-shadow:
+      1px 1px 0 #d4cbdc,
+      2px 3px 4px rgba(40,25,50,0.25),
+      -1px -1px 0 rgba(255,255,255,0.6);
+    user-select:none;
+    z-index:6;
+    font-family:'Dancing Script', cursive;
+  }
+  .text-layer .line1{ font-size:30px; font-weight:600; letter-spacing:1px; }
+  .text-layer .line2{ font-size:44px; font-weight:700; margin-top:-4px;}
+  .text-layer .line3{ font-size:50px; font-weight:700; margin-top:-6px; color:#fffdf7;}
+  .heart-cream{
+    font-size:26px;
+    margin-top:4px;
+    display:inline-block;
+    color:#f6d8dd;
+    animation: heartbeat 1.6s ease-in-out infinite;
+  }
+  @keyframes heartbeat{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.18);} }
+
+  /* candle */
+  .candle{
+    position:absolute;
+    left:196px;
+    top:24px;
+    width:10px;
+    height:46px;
+    background: repeating-linear-gradient(180deg, var(--gold) 0 6px, #f0d99a 6px 12px);
+    border-radius:3px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+    z-index:7;
+  }
+  .wick{ position:absolute; left:3px; top:-8px; width:3px; height:9px; background:#5b4630; border-radius:2px;}
+  .flame{
+    position:absolute;
+    left:-3px;
+    top:-30px;
+    width:16px;
+    height:24px;
+    background: radial-gradient(circle at 50% 70%, #fff6c8, #ffb347 55%, #ff7b3d 85%);
+    border-radius:50% 50% 50% 50% / 65% 65% 40% 40%;
+    filter: drop-shadow(0 0 10px rgba(255,170,60,0.75));
+    animation: flicker 1.1s ease-in-out infinite;
+    transform-origin:bottom center;
+  }
+  @keyframes flicker{
+    0%,100%{ transform:scale(1) rotate(-2deg); }
+    30%{ transform:scale(1.06,0.94) rotate(2deg); }
+    60%{ transform:scale(0.94,1.08) rotate(-1deg); }
+  }
+
+  .caption{
+    margin-top:34px;
+    font-family:'Dancing Script', cursive;
+    font-size:22px;
+    color:#6b5a83;
+    text-align:center;
+    opacity:0.85;
+  }
+</style>
 </head>
 <body>
 
-    <div class="box-container">
-        <div class="cake">
-            
-            <!-- Guldasta qismi -->
-            <div class="bouquet">
-                <!-- Poyalar va Barglar -->
-                <div class="stems">
-                    <div class="stem stem-1"></div>
-                    <div class="stem stem-2"></div>
-                    <div class="stem stem-3"></div>
-                    <div class="stem stem-4"></div>
-                    <div class="stem stem-5"></div>
-                    
-                    <div class="leaf leaf-1"></div>
-                    <div class="leaf leaf-2"></div>
-                </div>
+  <div class="scene">
+    <div class="stage-shadow"></div>
 
-                <!-- Lolalar -->
-                <div class="tulip purple-tulip t1">
-                    <div class="petal left-p"></div>
-                    <div class="petal right-p"></div>
-                    <div class="petal center-p"></div>
-                </div>
-                <div class="tulip pink-tulip t2">
-                    <div class="petal left-p"></div>
-                    <div class="petal right-p"></div>
-                    <div class="petal center-p"></div>
-                </div>
-                <div class="tulip light-purple t3">
-                    <div class="petal left-p"></div>
-                    <div class="petal right-p"></div>
-                    <div class="petal center-p"></div>
-                </div>
-                <div class="tulip purple-tulip t4">
-                    <div class="petal left-p"></div>
-                    <div class="petal right-p"></div>
-                    <div class="petal center-p"></div>
-                </div>
-                <div class="tulip pink-tulip t5">
-                    <div class="petal left-p"></div>
-                    <div class="petal right-p"></div>
-                    <div class="petal center-p"></div>
-                </div>
-                <div class="tulip light-purple t6">
-                    <div class="petal left-p"></div>
-                    <div class="petal right-p"></div>
-                    <div class="petal center-p"></div>
-                </div>
+    <div class="cake-wrap">
+      <div class="cake">
+        <div class="rim" id="rim"></div>
 
-                <!-- Boyoqlik Bant -->
-                <div class="ribbon-bow">
-                    <div class="loop left"></div>
-                    <div class="loop right"></div>
-                    <div class="center-knot"></div>
-                    <div class="tail left"></div>
-                    <div class="tail right"></div>
-                </div>
-            </div>
+        <div class="bouquet">
+          <div class="stem stem-1"></div>
+          <div class="stem stem-2"></div>
+          <div class="stem stem-3"></div>
+          <div class="stem stem-4"></div>
+          <div class="stem stem-5"></div>
+          <div class="leaf leaf-1"></div>
+          <div class="leaf leaf-2"></div>
 
-            <!-- Kremdan yozuvlar -->
-            <div class="text-layer">
-                <h1>happy</h1>
-                <h2>birthday</h2>
-                <h2>Marjona</h2>
-                <div class="heart-cream">♥</div>
-            </div>
+          <div class="tulip purple-tulip t1">
+            <div class="petal left-p"></div><div class="petal right-p"></div><div class="petal center-p"></div>
+          </div>
+          <div class="tulip pink-tulip t2">
+            <div class="petal left-p"></div><div class="petal right-p"></div><div class="petal center-p"></div>
+          </div>
+          <div class="tulip light-purple t3">
+            <div class="petal left-p"></div><div class="petal right-p"></div><div class="petal center-p"></div>
+          </div>
+          <div class="tulip purple-tulip t4">
+            <div class="petal left-p"></div><div class="petal right-p"></div><div class="petal center-p"></div>
+          </div>
+          <div class="tulip pink-tulip t5">
+            <div class="petal left-p"></div><div class="petal right-p"></div><div class="petal center-p"></div>
+          </div>
+          <div class="tulip light-purple t6">
+            <div class="petal left-p"></div><div class="petal right-p"></div><div class="petal center-p"></div>
+          </div>
 
-            <!-- Mayda bezak marvaridlari -->
-            <div class="pearl p1"></div>
-            <div class="pearl p2"></div>
-            <div class="pearl p3"></div>
-            <div class="pearl p4"></div>
-            <div class="pearl p5"></div>
-            <div class="pearl p6"></div>
-            <div class="pearl p7"></div>
-            <div class="pearl p8"></div>
-
+          <div class="ribbon-bow">
+            <div class="loop left"></div>
+            <div class="loop right"></div>
+            <div class="center-knot"></div>
+            <div class="tail left"></div>
+            <div class="tail right"></div>
+          </div>
         </div>
+
+        <div class="text-layer">
+          <div class="line1">happy</div>
+          <div class="line2">birthday</div>
+          <div class="line3">Marjona</div>
+          <div class="heart-cream">&#9829;</div>
+        </div>
+
+        <div class="candle">
+          <div class="wick"></div>
+          <div class="flame"></div>
+        </div>
+
+        <div class="pearl p1"></div><div class="pearl p2"></div><div class="pearl p3"></div>
+        <div class="pearl p4"></div><div class="pearl p5"></div><div class="pearl p6"></div>
+        <div class="pearl p7"></div><div class="pearl p8"></div>
+      </div>
     </div>
 
+    <div class="plate"></div>
+    <div class="caption"> Tug'ilgan kuniz muborak bo'lsin! 🎂</div>
+  </div>
+
+  <script>
+    // rim dots
+    const rim = document.getElementById('rim');
+    const R = 195, cx = 200, cy = 200, n = 34;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2;
+      const x = cx + R * Math.cos(a) - 6;
+      const y = cy + R * Math.sin(a) - 6;
+      const dot = document.createElement('span');
+      dot.style.left = x + 'px';
+      dot.style.top = y + 'px';
+      rim.appendChild(dot);
+    }
+
+    // floating petal fx
+    const colors = ['#c9b3e0','#e7bfc4','#b6a4d6'];
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal-fx';
+      const size = 8 + Math.random() * 8;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.background = colors[i % colors.length];
+      p.style.animationDuration = (9 + Math.random() * 8) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(p);
+    }
+  </script>
 </body>
 </html>
